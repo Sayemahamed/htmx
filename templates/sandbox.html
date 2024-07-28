@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mx-auto mt-6 max-w-sm">
+    <h1 class="text-5xl mb-4">Alpine.js Demo</h1>
+    <!--  x-data  {to declare data data are limited to its scope}-->
+    <div x-data="{open:false,name:'Sayem'}">
+        <!-- x-on  {run action on event} , x-bind {to dynamically change html attribute} -->
+        <button x-bind:class="open ? 'bg-red-500' : 'bg-blue-500'" class="text-white px-4 p-2 rounded"
+            x-on:click="open = !open">Toggle</button>
+        <!-- x-cloak {to remove flickering} , x-transition {to make transitions Smooth} -->
+        <div x-show="open" x-transition x-cloak class="bg-gray-200 p-4 my-6 rounded">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, fuga minima quasi eos in doloribus
+            cupiditate aperiam voluptates dolorem reprehenderit id dolorum? Itaque, nulla rerum facere molestiae omnis
+            dolorum quia.
+        </div>
+        <div class="my-4">
+            <!--  x-text {to inject data } -->
+            The value of name is <span x-text="name" class="font-bold"></span>
+        </div>
+        <!-- x-effect {run action when data changes ,same as useEffect in react} -->
+        <div x-effect="alert(name)"></div>
+    </div>
+</div>
+
+{% endblock %}
