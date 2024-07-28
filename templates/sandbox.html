@@ -2,14 +2,20 @@
 {% block content %}
 
 <div class="container mx-auto mt-6 max-w-sm">
+    <!-- here user state in saved in local browser storage with key 'store' -->
+    <div x-init="$watch('$store.store',(value)=>{localStorage.setItem('store',JSON.stringify(value))})"></div>
+
     <h1 class="text-5xl mb-4">Alpine.js Demo</h1>
     <!--  x-data  {to declare data data are limited to its scope}-->
-    <div x-data="{open:false,name:'Sayem'}">
+    <div x-data="{
+        name:'Sayem',
+        search:'',
+    }">
         <!-- x-on  {run action on event} , x-bind {to dynamically change html attribute} -->
-        <button x-bind:class="open ? 'bg-red-500' : 'bg-blue-500'" class="text-white px-4 p-2 rounded"
-            x-on:click="open = !open">Toggle</button>
+        <button x-bind:class="$store.store.open ? 'bg-red-500' : 'bg-blue-500'" class="text-white px-4 p-2 rounded"
+            x-on:click="$store.store.toggle()">Toggle</button>
         <!-- x-cloak {to remove flickering} , x-transition {to make transitions Smooth} -->
-        <div x-show="open" x-transition x-cloak class="bg-gray-200 p-4 my-6 rounded">
+        <div x-show="$store.store.open" x-transition x-cloak class="bg-gray-200 p-4 my-6 rounded">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, fuga minima quasi eos in doloribus
             cupiditate aperiam voluptates dolorem reprehenderit id dolorum? Itaque, nulla rerum facere molestiae omnis
             dolorum quia.
@@ -19,8 +25,43 @@
             The value of name is <span x-text="name" class="font-bold"></span>
         </div>
         <!-- x-effect {run action when data changes ,same as useEffect in react} -->
-        <div x-effect="alert(name)"></div>
+        <div x-effect="console.log(name)"></div>
+        <!-- x-model {is used to bind data with input} -->
+        <input x-model="search" type="text" class="border p-2 w-full mb-2 mt-6" placeholder="Search for something" />
+        <span class="font-bold">Searching for:
+            <span x-text="search"></span>
+        </span>
+        <!-- x-if {conditional template rendering} -->
+        <template x-if="$store.store.open">
+            <div class="bg-gray-50 p-2 mt-8">Template based on condition...</div>
+        </template>
+        <!-- x-for {for loop} -->
+        <template x-for="post in $store.store.posts">
+            <div x-text="post.data"></div>
+        </template>
+        <button x-on:click="$store.store.add({data:search}); search=''"
+            class="bg-blue-800 text-white px-4 py-2 mt-4 rounded">
+            Add post
+        </button>
+        <!-- x-ref {is used to reference html element to compleat alpine operation } -->
+        <div x-ref="sandbox">Hello World</div>
+        <button x-on:click="$refs.sandbox.innerHTML = ''" class="mt-2 bg-black text-white p-2 rounded-lg">
+            Click
+        </button>
+        <!-- x-html { is used to inject html } -->
+        <div x-html="$refs.sandbox.innerHTML">...</div>
+        <!-- $el { is used to access property of the current element} -->
+        <button x-on:click="$el.innerHTML = 'Hello World'" class="mt-4 p-4 border">
+            Replace Text
+        </button>
+        <!-- x-init { is used to run any function at the initialization of the element  }, $watch { is used to run any function whenever a given value changes } -->
+        <div x-init="$watch('$store.store.posts',(value)=>{console.log(value)})"></div>
+        <!-- $dispatch { is used to dispatch an event } , @'eventName' { is used to lisente to the event } -->
+        <div @notify="alert('You have been notified')">
+            <button x-on:click="$dispatch('notify')" class="bg-green-700 text-white p-2 mt-4 rounded-lg">Notify</button>
+        </div>
+        <!-- $data { has all the data of the scope } -->
+        <button class="mt-2 bg-black text-white p-2 rounded-lg" x-on:click="console.log($data)">Get data</button>
     </div>
 </div>
-
 {% endblock %}
