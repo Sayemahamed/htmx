@@ -14,7 +14,7 @@
         <!-- x-on  {run action on event} , x-bind {to dynamically change html attribute} -->
         <button x-bind:class="$store.store.open ? 'bg-red-500' : 'bg-blue-500'" class="text-white px-4 p-2 rounded"
             x-on:click="$store.store.toggle()">Toggle</button>
-        <!-- x-cloak {to remove flickering} , x-transition {to make transitions Smooth} -->
+        <!-- x-cloak {to remove flickering} , x-transition {to make transitions Smooth} , x-show { is used to show and hide depending on given parameter } -->
         <div x-show="$store.store.open" x-transition x-cloak class="bg-gray-200 p-4 my-6 rounded">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, fuga minima quasi eos in doloribus
             cupiditate aperiam voluptates dolorem reprehenderit id dolorum? Itaque, nulla rerum facere molestiae omnis
