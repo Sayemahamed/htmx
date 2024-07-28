@@ -64,4 +64,9 @@
         <button class="mt-2 bg-black text-white p-2 rounded-lg" x-on:click="console.log($data)">Get data</button>
     </div>
 </div>
+
+<div x-data="{ width: 0, height: 0 }" x-resize="width = $width; height = $height">
+    <p x-text="'Width: ' + width + 'px'"></p>
+    <p x-text="'Height: ' + height + 'px'"></p>
+</div>
 {% endblock %}
