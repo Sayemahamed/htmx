@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name="index"),
     path('users/',views.users,name="users"),
+    path('convert/',views.convert,name="convert"),
     path('htmx/',views.htmx,name="htmx"),
     path('alpine/sandbox',views.alpine_sandbox,name="alpine"),
     path("__reload__/", include("django_browser_reload.urls")),

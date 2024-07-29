@@ -8,3 +8,5 @@ def alpine_sandbox(request):
     return render (request,"sandbox.html")
 def htmx(request):
     return render(request,"htmx.html")
+def convert(request):
+    return render(request,"convert.html")
