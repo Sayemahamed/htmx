@@ -6,7 +6,7 @@
     <div x-init="$watch('$store.store',(value)=>{localStorage.setItem('store',JSON.stringify(value))})"></div>
 
     <h1 class="text-5xl mb-4">Alpine.js Demo</h1>
-    <!--  x-data  {to declare data data are limited to its scope}-->
+    <!--  x-data  {to declare data data are limited to its scope} , $persist will save the data in localStorage-->
     <div x-data="{
         name:$persist('Sayem'),
         search:'',
@@ -25,17 +25,17 @@
             The value of name is <span x-text="name" class="font-bold"></span>
         </div>
         <!-- x-effect {run action when data changes ,same as useEffect in react} -->
-        <div x-effect="console.log(name)"></div>
+        <div x-effect="console.log(search)"></div>
         <!-- x-model {is used to bind data with input} -->
         <input x-model="search" type="text" class="border p-2 w-full mb-2 mt-6" placeholder="Search for something" />
         <span class="font-bold">Searching for:
             <span x-text="search"></span>
         </span>
-        <!-- x-if {conditional template rendering} -->
+        <!-- x-if { conditional template rendering , [but it will render only one child element] } -->
         <template x-if="$store.store.open">
             <div class="bg-gray-50 p-2 mt-8">Template based on condition...</div>
         </template>
-        <!-- x-for {for loop} -->
+        <!-- x-for {for loop , [but it will render only one child element] } -->
         <template x-for="post in $store.store.posts">
             <div x-text="post.data"></div>
         </template>
@@ -51,7 +51,7 @@
         <!-- x-html { is used to inject html } -->
         <div x-html="$refs.sandbox.innerHTML">...</div>
         <!-- $el { is used to access property of the current element} -->
-        <button x-on:click="$el.innerHTML = 'Hello World'" class="mt-4 p-4 border">
+        <button x-on:click="$el.innerHTML = '<s>Hello World</s>'" class="mt-4 p-4 border">
             Replace Text
         </button>
         <!-- x-init { is used to run any function at the initialization of the element  }, $watch { is used to run any function whenever a given value changes } -->

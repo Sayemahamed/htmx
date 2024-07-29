@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center">
+    <h1 class="text-2xl font-bold my-5">HTMX Crash Course</h1>
+    <!-- hx-get { to make request to URL } , hx-trigger { to set the trigger to make request } -->
+    <button hx-get="/users" hx-target="this" hx-confirm="Are You Sure?"
+        class="bg-blue-500 text-white py-2 px-3 my-5 rounded-lg">Fetch
+        Users</button>
+    <!-- hx-swap { will replace the element with response } -->
+    <button hx-get="/users" hx-swap="outerHTML" hx-trigger="mouseover once" hx-indicator="#loading"
+        class="bg-blue-500 text-white py-2 px-3 my-5 rounded-lg">Fetch
+        Users</button>
+    <span class="htmx-indicator" id="loading">Loading...</span>
+    <div class="container mx-auto mt-8 text-center">
+        <div class="bg-white p-4 border rounded-lg max-w-lg m-auto">
+            <h1 class="text-2xl font-bold mb-4">Temperature Converter</h1>
+            <form hx-trigger="submit" hx-post="/convert" hx-target="#result" hx-indicator="#loading">
+                <label for="fahrenheit">Fahrenheit:</label>
+                <input type="number" class="border p-2 rounded" value="32" required>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded">Convert</button>
+                <div id="result" class="mt-6 text-xl"></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
