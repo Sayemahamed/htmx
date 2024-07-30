@@ -28,6 +28,7 @@ urlpatterns = [
     path('htmx/',views.htmx,name="htmx"),
     path('poll/',views.poll,name="poll"),
     path('alpine/sandbox',views.alpine_sandbox,name="alpine_sandbox"),
+    path('alpine/component',views.alpine_sandbox,name="alpine_component"),
     path('alpine/',views.alpine,name="alpine"),
     path("__reload__/", include("django_browser_reload.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
