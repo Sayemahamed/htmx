@@ -19,3 +19,5 @@ def poll(request):
     })
 def alpine(request):
     return render(request,"alpine.html")
+def example(request):
+    return render(request,"example.html")
