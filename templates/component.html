@@ -100,5 +100,35 @@
             </template>
         </div>
     </div>
+
+    <!-- Accordion  -->
+    <div x-on:click.outside="open='item 0'" class="mt-6" x-data="{
+        items:[
+            {tittle:'item 1',body:'body 1'},
+            {tittle:'item 2',body:'body 2'},
+            {tittle:'item 3',body:'body 3'},
+            {tittle:'item 4',body:'body 4'},
+            {tittle:'item 5',body:'body 5'},
+            {tittle:'item 6',body:'body 6'}
+            ],
+            open:'item 2'
+        }">
+        <template x-for="item in items">
+            <div class="bg-white border p-1 rounded pl-4">
+                <div class="font-semibold flex justify-between items-center" x-on:click="open=item.tittle">
+                    <div x-text="item.tittle"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="h-4 w-5 ml-2 transition-all"
+                        :class="{'rotate-90':open==item.tittle}">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                </div>
+                <div x-show="open==item.tittle" x-transition:enter x-text="item.body"></div>
+            </div>
+        </template>
+    </div>
+
+    <!-- Popover  -->
+    <div></div>
 </div>
 {% endblock %}
